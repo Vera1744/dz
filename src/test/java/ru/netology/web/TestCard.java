@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class testCard {
+public class TestCard {
 
     private WebDriver driver;
 
@@ -42,12 +42,12 @@ public class testCard {
     }
 
     @Test
-    void shouldTestV1() {
-        List<WebElement> elements = driver.findElements(By.className("input__control"));
-        elements.get(0).sendKeys("Кротов Иван");
-        elements.get(1).sendKeys("+79270000000");
-        driver.findElement(By.className("checkbox__box")).click();
-        driver.findElement(By.className("button")).click();
+    void shouldSendForm() {
+        WebElement form = driver.findElement(By.className("form"));
+        form.findElement(By.cssSelector("[data-test-id='name'] input")).sendKeys("Кротов Иван");
+        form.findElement(By.cssSelector("[data-test-id='phone'] input")).sendKeys("+79270000000");
+        form.findElement(By.cssSelector("[data-test-id='agreement']") ).click();
+        form.findElement(By.className("button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id='order-success']")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
     }
